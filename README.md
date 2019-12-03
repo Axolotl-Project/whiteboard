@@ -1,0 +1,1 @@
+This is the readme for our whiteboard project. This will be updated as we go along.
