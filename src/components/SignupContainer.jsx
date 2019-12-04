@@ -4,9 +4,9 @@ class SignupContainer extends Component {
   constructor () {
     super() 
     this.state = {
-      firstname: '',
-      lastname: '',
-      username: '',
+      firstName: '',
+      lastName: '',
+      email: '',
       password: ''
     }
     this.onSignupSubmit = this.onSignupSubmit.bind(this);
@@ -19,17 +19,18 @@ class SignupContainer extends Component {
 
     //set stating 
     this.setState({
-      firstname: e.target.value,
-      lastname: e.target.value,
-      username: e.target.value,
+      firstName: e.target.value,
+      lastName: e.target.value,
+      email: e.target.value,
       password: e.target.value
     });
 
     //create url variable to hold server signup[ address
     const url = 'http://localhost:4000/signup';
      // submit what is currently in state entry
+     console.log("sending req")
      fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
@@ -41,44 +42,53 @@ class SignupContainer extends Component {
       referrer: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(this.state), // body data type must match "Content-Type" header
     })
-      .then((res) => res.json())
-      .then((data) => console.log('username, pass, first and last name successfully sent!!'))
+      // .then((res) => res.json())
+      // .then((data) => console.log('email, pass, first and last Name successfully sent!!'))
+      .then(() => {
+        this.setState({
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: ''
+        });
+        window.location.href = 'http://localhost:3000/api'
+      })
       .catch((err) => console.log('Failed to fetch', err));
 
 
-    //log username and passwrd submit to console - confirm state has been updated with proper data
-    console.log('The current state of firstname is: ', this.state.firstname);
-    console.log('The current state of lastname is: ', this.state.lastname);
-    console.log('The current state of username is: ', this.state.username);
-    console.log('The current state of pswd is: ', this.state.password);
+    //log email and passwrd submit to console - confirm state has been updated with proper data
+    // console.log('The current state of firstName is: ', this.state.firstName);
+    // console.log('The current state of lastName is: ', this.state.lastName);
+    // console.log('The current state of email is: ', this.state.email);
+    // console.log('The current state of pswd is: ', this.state.password);
     
 
     //reset the state of the page to be an empty string 
-    this.setState({
-      firstname: '',
-      lastname: '',
-      username: '',
-      password: ''
-    });
+    // this.setState({
+    //   firstName: '',
+    //   lastName: '',
+    //   email: '',
+    //   password: ''
+    // });
   }
 
-  //on firstname feild change upstate state
+  //on firstName feild change upstate state
   onFeildfnChange (e) {
     this.setState({
-      firstname: e.target.value,
+      firstName: e.target.value,
     });
   };
-  //on lastname feild change upstate state
+  //on lastName feild change upstate state
   onFeildlastNameChange (e) {
     this.setState({
-      lastname: e.target.value,
+      lastName: e.target.value,
     });
   };
 
   //on user feild change upstate state
   onFeildusrChange (e) {
     this.setState({
-      username: e.target.value,
+      email: e.target.value,
     });
   };
 
@@ -99,22 +109,22 @@ class SignupContainer extends Component {
         <form>
             <label>
               First Name:
-              <input type="text" value={this.state.firstname} onChange={(e)=> {this.onFeildfnChange(e)}}  name="firstnamename" />
+              <input type="text" value={this.state.firstName} onChange={(e)=> {this.onFeildfnChange(e)}}  Name="firstNameName" />
             </label>
               <br/>
             <label>
               Last Name:
-              <input type="text" value={this.state.lastname} onChange={(e)=> {this.onFeildlastNameChange(e)}}  name="lastname" />
+              <input type="text" value={this.state.lastName} onChange={(e)=> {this.onFeildlastNameChange(e)}}  Name="lastName" />
             </label>
               <br/>
             <label>
-              user-name:
-              <input type="text" value={this.state.username} onChange={(e)=> {this.onFeildusrChange(e)}}  name="username" />
+              Email:
+              <input type="text" value={this.state.email} onChange={(e)=> {this.onFeildusrChange(e)}}  Name="email" />
             </label>
             <br/>
             <label>
-               password:
-              <input type="text" value={this.state.password} onChange={(e)=> {this.onFeildpsdChange(e)}}  name="passwd" />
+               Password:
+              <input type="text" value={this.state.password} onChange={(e)=> {this.onFeildpsdChange(e)}}  Name="passwd" />
             </label>
             <br/>
           <input type="submit" value="Submit" onClick={(e) => this.onSignupSubmit(e)}/>

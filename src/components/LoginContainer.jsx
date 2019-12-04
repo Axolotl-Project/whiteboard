@@ -5,7 +5,7 @@ class LoginContainer extends Component {
     super() 
     this.onLoginSubmit = this.onLoginSubmit.bind(this);
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
   }
@@ -17,7 +17,7 @@ class LoginContainer extends Component {
 
     //set stating 
     this.setState({
-      username: e.target.value,
+      email: e.target.value,
       password: e.target.value
     });
 
@@ -38,18 +38,19 @@ class LoginContainer extends Component {
       body: JSON.stringify(this.state), // body data type must match "Content-Type" header
     })
       .then((res) => res.json())
-      .then((data) => console.log('username, pass'))
+      .then((data) => console.log('email, pass'))
+      .then(() => window.location.href = 'http://localhost:3000/api')
       .catch((err) => console.log('Failed to fetch', err));
 
 
-    //log username and passwrd submit to console
-    console.log('The current state of username is: ', this.state.username);
-    console.log('The current state of pswd is: ', this.state.password);
+    //log email and passwrd submit to console
+    // console.log('The current state of email is: ', this.state.email);
+    // console.log('The current state of pswd is: ', this.state.password);
     
 
     //reset the state of the page to be an empty string 
     this.setState({
-      username: '',
+      email: '',
       password: ''
     });
   }
@@ -57,7 +58,7 @@ class LoginContainer extends Component {
   //on user feild change upstate state
   onFeildusrChange (e) {
     this.setState({
-      username: e.target.value,
+      email: e.target.value,
     });
   };
 
@@ -76,12 +77,12 @@ class LoginContainer extends Component {
         </h1>
         <form>
             <label>
-              user-name:
-              <input type="text" value={this.state.username} onChange={(e)=> {this.onFeildusrChange(e)}}  name="name" />
+              Email:
+              <input type="text" value={this.state.email} onChange={(e)=> {this.onFeildusrChange(e)}}  name="name" />
             </label>
             <br/>
             <label>
-               password:
+               Password:
               <input type="text" value={this.state.password} onChange={(e)=> {this.onFeildpsdChange(e)}}  name="passwd" />
             </label>
             <br/>
