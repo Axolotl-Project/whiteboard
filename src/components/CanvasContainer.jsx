@@ -40,17 +40,22 @@ export default class CanvasContainer extends Component {
   //   shadowBlur: 40,
   //   opacity: 0.5
   // });
+  styles = {
+    width: 250,
+    height: 300
+  };
+  
 
   render() {
     return (
-        <Stage width={window.innerWidth} height={window.innerHeight}>
+        <Stage width={this.styles.width} height={this.styles.height}>
           <Layer>
             <Text text="Try to drag a star" />
-            {[...Array(10)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                x={Math.random() * window.innerWidth}
-                y={Math.random() * window.innerHeight}
+                x={Math.random() * 250}
+                y={Math.random() * 250}
                 numPoints={5}
                 innerRadius={20}
                 outerRadius={40}

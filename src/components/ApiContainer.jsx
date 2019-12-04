@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ToolBar from './ToolBar';
 import CanvasContainer from './CanvasContainer';
-import Canvas from './Canvas.js';
+import Rectangle from './Rectangle';
 
 
 
@@ -18,8 +18,8 @@ class ApiContainer extends Component {
     return (
       <div className="apiCon">
         <ToolBar />
-        {/* <Canvas /> */}
         <CanvasContainer />
+        <Rectangle />
       </div>
     );
   }
