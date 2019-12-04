@@ -56,7 +56,6 @@ userController.login = (req, res, next) => {
 }
 
 userController.getTemplates = (req,res,next) => {
-<<<<<<< HEAD
   //assuming the user id has been stored on the cookie
   const userCookieId = req.cookie;
   Template.find({userId: userCookieId} ,'arrayOfTemplates', (err, doc) => {
@@ -65,14 +64,12 @@ userController.getTemplates = (req,res,next) => {
   }
 )}
 
-
-=======
   //assuming the Id is stored on the cookie
   // const userCookieId = req.cookie;
   // Template.find({userId: userCookieId} ,'arrayOfTemplates', (err, doc) => {
   // console.log(doc);
-  next();
-  }
+  // next();
+  // }
 // )}
 
 userController.getUsers = (req,res, next) => {
@@ -81,7 +78,6 @@ userController.getUsers = (req,res, next) => {
     return next();
   });
 }
->>>>>>> dev
 
 
 

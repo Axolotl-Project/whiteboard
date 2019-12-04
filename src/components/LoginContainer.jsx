@@ -37,9 +37,15 @@ class LoginContainer extends Component {
       referrer: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(this.state), // body data type must match "Content-Type" header
     })
-      .then((res) => res.json())
+      // .then((res) => res.json())
       .then((data) => console.log('email, pass'))
-      .then(() => window.location.href = 'http://localhost:3000/api')
+      .then(() => {
+        this.setState({
+          email: '',
+          password: ''
+        });
+        window.location.href = 'http://localhost:3000/api'
+      })
       .catch((err) => console.log('Failed to fetch', err));
 
 
@@ -49,10 +55,7 @@ class LoginContainer extends Component {
     
 
     //reset the state of the page to be an empty string 
-    this.setState({
-      email: '',
-      password: ''
-    });
+    
   }
 
   //on user feild change upstate state

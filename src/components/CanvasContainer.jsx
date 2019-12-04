@@ -28,31 +28,13 @@ export default class CanvasContainer extends Component {
             draggable
           /></Group>)]});
           break;
-        case 'LINE':
-            if (e.target.id !== 0 && e.target.getParent()) {
-              // e.target.getParent().children.push(<Line
-              //   key={this.state.arr.length} 
-              //   points={[this.state.mStart.x,this.state.mStart.y,e.evt.clientX, e.evt.clientY - this.props.tbh]}
-              //   stroke='black'            
-              //   />);
-              // e.target.getParent().children.push(new Konva.Line({
-              //   points: [this.state.mStart.x,this.state.mStart.y,e.evt.clientX, e.evt.clientY - this.props.tbh],
-              //   stroke: 'black',
-              // }))
-                // this.setState({ arr: [...this.state.arr]});
-                // let temp = this.curTool;
-                // this.curTool = 'ARROW';
-                // // e.target.click();
-                // this.curTool = temp;
-
-            // } else {          
+        case 'LINE':        
               this.setState({
               arr: [...this.state.arr, (<Line
                 key={this.state.arr.length} 
                 points={[this.state.mStart.x,this.state.mStart.y,e.evt.clientX, e.evt.clientY - this.props.tbh]}
                 stroke='black'            
                 />)]});
-            }
           break;
         default:
           break;
