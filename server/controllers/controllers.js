@@ -1,4 +1,3 @@
-// cookies plus template?
 const models = require('../models/models.js');
 const { User } = models;
 const { Template } = models;
@@ -12,6 +11,7 @@ const bcrypt = require('bcryptjs');
 
 
 userController.signup = (req, res, next) => {
+  // console.log(req.body);
   console.log("start signup")
   // console.log(req.body);
 
@@ -43,14 +43,33 @@ userController.createTemplate = (req, res, next) => {
   next();
 }
 
+userController.login = (req, res, next) => {
+  if (req.session) return next();
+  const {password, email} = req.body;
+  User.find({email: email}, 'password', (err, hashDoc) => {
+    bcrypt.compare(password, hashDoc, (err, result) => {
+      if (!result) return alert("This password and email combination do not exist in our database.");
+      if (err) return next(err);
+      else if (result === "true") return next();
+    });
+  });
+}
 
 userController.getTemplates = (req,res,next) => {
+  //assuming the user id has been stored on the cookie
+  const userCookieId = req.cookie;
+  Template.find({userId: userCookieId} ,'arrayOfTemplates', (err, doc) => {
+  console.log(doc);
+  next();
+  }
+)}
+
   //assuming the Id is stored on the cookie
   // const userCookieId = req.cookie;
   // Template.find({userId: userCookieId} ,'arrayOfTemplates', (err, doc) => {
   // console.log(doc);
-  next();
-  }
+  // next();
+  // }
 // )}
 
 userController.getUsers = (req,res, next) => {

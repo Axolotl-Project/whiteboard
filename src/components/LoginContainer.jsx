@@ -33,11 +33,13 @@ class LoginContainer extends Component {
       },
       body: JSON.stringify(this.state), // body data type must match "Content-Type" header
     })
-      .then(() => this.setState({
-        email: '',
-        password: ''
-      }))
-      .then(() => window.location.href = 'http://localhost:3000/api')
+      .then(() => {
+        this.setState({
+          email: '',
+          password: ''
+        });
+        window.location.href = 'http://localhost:3000/api'
+      })
       .catch((err) => console.log('Failed to fetch', err));
 
 
