@@ -21,24 +21,18 @@ class LoginContainer extends Component {
       password: e.target.value
     });
 
-    //create url variable to hold server signup[ address
+    //create url variable to hold server signup address
     const url = 'http://localhost:4000/login';
      // submit what is currently in state entry
      fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin', // include, *same-origin, omit
+     
       headers: {
         'Content-Type': 'application/json',
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      redirect: 'follow', // manual, *follow, error
-      referrer: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(this.state), // body data type must match "Content-Type" header
     })
-      // .then((res) => res.json())
-      .then((data) => console.log('email, pass'))
       .then(() => {
         this.setState({
           email: '',
@@ -50,8 +44,8 @@ class LoginContainer extends Component {
 
 
     //log email and passwrd submit to console
-    // console.log('The current state of email is: ', this.state.email);
-    // console.log('The current state of pswd is: ', this.state.password);
+    console.log('The current state of email is: ', this.state.email);
+    console.log('The current state of pswd is: ', this.state.password);
     
 
     //reset the state of the page to be an empty string 
@@ -71,6 +65,11 @@ class LoginContainer extends Component {
       password: e.target.value
     });
   };
+
+  //redirect to sign up page
+  siginupBtn () {
+    window.location.href = 'http://localhost:3000/signup'
+  }
   
   render() {
     return (
@@ -81,16 +80,18 @@ class LoginContainer extends Component {
         <form>
             <label>
               Email:
-              <input type="text" value={this.state.email} onChange={(e)=> {this.onFeildusrChange(e)}}  name="name" />
+              <input type="email" value={this.state.email} onChange={(e)=> {this.onFeildusrChange(e)}}  name="name" />
             </label>
             <br/>
             <label>
                Password:
-              <input type="text" value={this.state.password} onChange={(e)=> {this.onFeildpsdChange(e)}}  name="passwd" />
+              <input type="password" value={this.state.password} onChange={(e)=> {this.onFeildpsdChange(e)}}  name="passwd" />
             </label>
             <br/>
           <input type="submit" value="Submit" onClick={(e) => this.onLoginSubmit(e)}/>
         </form>
+        Click here to sign up:
+        <button onClick={()=> this.siginupBtn()}>Sign up</button>
       </div>
     );
   }

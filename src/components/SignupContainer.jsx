@@ -99,6 +99,11 @@ class SignupContainer extends Component {
     });
   };
 
+  //redirect to sign up page
+  loginupBtn () {
+    window.location.href = 'http://localhost:3000/login'
+  }
+
   render() {
 
     return (
@@ -129,7 +134,10 @@ class SignupContainer extends Component {
             <br/>
           <input type="submit" value="Submit" onClick={(e) => this.onSignupSubmit(e)}/>
         </form>
+        Aleady have an account? Log in here:
+        <button onClick={()=> this.loginupBtn()}>log in</button>
       </div>
+      
     );
   }
 }
