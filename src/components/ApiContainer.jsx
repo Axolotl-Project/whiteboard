@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
+import ToolBar from './ToolBar';
+import CanvasContainer from './CanvasContainer';
+import Canvas from './Canvas.js';
+
+
 
 class ApiContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      curTool: 'ARROW',
+    }
+  }
 
   render() {
 
     return (
-      <div>
-        <h1>
-          Api Page
-        </h1>
+      <div className="apiCon">
+        <ToolBar />
+        {/* <Canvas /> */}
+        <CanvasContainer />
       </div>
     );
   }
