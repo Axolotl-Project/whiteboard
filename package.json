@@ -19,7 +19,7 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/server.js",
     "build": "react-scripts build",
     "dev": "nodemon server/server.js & react-scripts start",
     "test": "react-scripts test",
