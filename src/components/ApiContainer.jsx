@@ -3,8 +3,6 @@ import ToolBar from './ToolBar';
 import CanvasContainer from './CanvasContainer';
 import Rectangle from './Rectangle';
 
-
-
 class ApiContainer extends Component {
   constructor(props) {
     super(props);

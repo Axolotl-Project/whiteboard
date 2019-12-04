@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import Button from "react-bootstrap/Button";
 import Konva from 'konva';
-import { Stage, Layer, Star, Text } from 'react-konva';
+import { Stage, Layer, Star, Text, Line } from 'react-konva';
+import { addLine, drawLine, eraseLine } from './Line.jsx';
 
 export default class CanvasContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mStart: {x: 0, y:0},
+      arr: []
+    };
+  }
   handleDragStart = e => {
     e.target.setAttrs({
       shadowOffset: {
@@ -13,6 +22,11 @@ export default class CanvasContainer extends Component {
       scaleY: 1.1
     });
   };
+
+  initialState = (e) => this.setState({
+    mStart: {x: e.evt.clientX, y:e.evt.clientY}
+  });
+
   handleDragEnd = e => {
     e.target.to({
       duration: 0.5,
@@ -24,38 +38,18 @@ export default class CanvasContainer extends Component {
     });
   };
 
-  //   stage = new Konva.Stage({
-      
-  //   })
-  //   pentagon = new Konva.RegularPolygon({
-  //   x: stage.width() / 2,
-  //   y: stage.height() / 2,
-  //   sides: 5,
-  //   radius: 70,
-  //   fill: 'red',
-  //   stroke: 'black',
-  //   strokeWidth: 4,
-  //   shadowOffsetX: 20,
-  //   shadowOffsetY: 25,
-  //   shadowBlur: 40,
-  //   opacity: 0.5
-  // });
-  styles = {
-    width: 250,
-    height: 300
-  };
   
-
+  styles = {
+    width: 600,
+    height: 600
+  }
+  
   render() {
-    return (
-        <Stage width={this.styles.width} height={this.styles.height}>
-          <Layer>
-            <Text text="Try to drag a star" />
-            {[...Array(5)].map((_, i) => (
+            const array = [...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                x={Math.random() * 250}
-                y={Math.random() * 250}
+                x={Math.random() * 500}
+                y={Math.random() * 500}
                 numPoints={5}
                 innerRadius={20}
                 outerRadius={40}
@@ -69,9 +63,41 @@ export default class CanvasContainer extends Component {
                 onDragStart={this.handleDragStart}
                 onDragEnd={this.handleDragEnd}
               />
-            ))}
-          </Layer>
-        </Stage>
+            ));
+    // const stage = new Konva.Stage({
+    //   width: 500,
+    //   height: 800,
+    //   container: 'containerId' // or "#containerId" or ".containerClass"
+    // });
+    
+    const stageEl = React.createRef();
+    const layerEl = React.createRef();
+    
+    const drawLine = () => {
+      console.log('This is stageEl: ', stageEl);
+      addLine(stageEl.current.getStage(), layerEl.current);
+    };
+
+    const eraseLine = () => {
+      addLine(stageEl.current.getStage(), layerEl.current, "erase");
+    };
+    
+    return(
+      <div id="containerId">
+      <Button onClick={drawLine}>
+        Line
+      </Button>
+      <Button onClick={eraseLine}>
+        Erase
+      </Button>
+      <Stage width={this.styles.width} height={this.styles.height} >
+        <Layer>
+          <Text text="Try to drag a star" />
+          {array}
+          {this.state.arr}
+        </Layer>
+      </Stage>
+      </div>
     );
   }
 }

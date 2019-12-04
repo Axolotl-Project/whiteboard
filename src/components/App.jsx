@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import LoginContainer from './LoginContainer.jsx';
 import SignupContainer from './SignupContainer.jsx';
 import ApiContainer from './ApiContainer.jsx';
